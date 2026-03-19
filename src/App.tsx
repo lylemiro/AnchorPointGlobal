@@ -22,6 +22,11 @@ import {
   Menu,
   X,
   ArrowRight,
+  ArrowLeft,
+  Mail,
+  Phone,
+  MapPin,
+  Send,
   Users,
   ChevronDown,
   Cloud,
@@ -56,7 +61,7 @@ const Navbar = ({ currentPage, setCurrentPage }: { currentPage: string, setCurre
           <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('solutions'); }} className={`hover:text-primary transition-colors ${currentPage === 'solutions' ? 'text-primary font-bold border-b-2 border-primary pb-1' : ''}`}>Solutions</a>
           <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('pricing'); }} className={`hover:text-primary transition-colors ${currentPage === 'pricing' ? 'text-primary font-bold border-b-2 border-primary pb-1' : ''}`}>Pricing</a>
           <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); }} className={`hover:text-primary transition-colors ${currentPage === 'about' ? 'text-primary font-bold border-b-2 border-primary pb-1' : ''}`}>About</a>
-          <a href="#contact" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); }} className="hover:text-primary transition-colors">Contact</a>
+          <a href="#contact" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); }} className={`hover:text-primary transition-colors ${currentPage === 'contact' ? 'text-primary font-bold border-b-2 border-primary pb-1' : ''}`}>Contact</a>
         </div>
         
         <div className="flex items-center justify-end gap-4">
@@ -90,7 +95,7 @@ const Navbar = ({ currentPage, setCurrentPage }: { currentPage: string, setCurre
             <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('solutions'); setIsMobileMenuOpen(false); }} className="text-lg font-semibold py-2 border-b border-slate-50">Solutions</a>
             <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('pricing'); setIsMobileMenuOpen(false); }} className="text-lg font-semibold py-2 border-b border-slate-50">Pricing</a>
             <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('about'); setIsMobileMenuOpen(false); }} className="text-lg font-semibold py-2 border-b border-slate-50">About</a>
-            <a href="#contact" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); setIsMobileMenuOpen(false); }} className="text-lg font-semibold py-2 border-b border-slate-50">Contact</a>
+            <a href="#contact" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); setIsMobileMenuOpen(false); }} className="text-lg font-semibold py-2 border-b border-slate-50">Contact</a>
             <button 
               onClick={() => { setCurrentPage('signin'); setIsMobileMenuOpen(false); }}
               className="w-full py-4 rounded-xl border border-slate-200 font-bold mt-4"
@@ -1456,6 +1461,90 @@ const PricingPage = () => {
 
 // --- Main App ---
 
+const ContactPage = () => {
+  return (
+    <div className="pt-32 pb-24 px-6 max-w-7xl mx-auto min-h-screen">
+      <div className="text-center mb-16">
+        <h1 className="text-5xl md:text-6xl font-headline font-black tracking-tighter text-on-surface mb-6">Get in Touch</h1>
+        <p className="text-xl text-on-surface-variant max-w-2xl mx-auto font-body">
+          Ready to scale your enterprise with elite talent? Our team is here to answer your questions and build your custom solution.
+        </p>
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-start">
+        {/* Contact Info */}
+        <div className="space-y-12">
+          <div className="bg-surface-container-low rounded-3xl p-8 md:p-10 border border-slate-100">
+            <h3 className="text-2xl font-headline font-bold mb-8">Contact Information</h3>
+            <div className="space-y-6">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                  <Mail size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-sm text-on-surface-variant mb-1 uppercase tracking-widest">Email Us</h4>
+                  <a href="mailto:hello@anchorpointglobal.com" className="text-lg font-semibold hover:text-primary transition-colors">hello@anchorpointglobal.com</a>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                  <Phone size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-sm text-on-surface-variant mb-1 uppercase tracking-widest">Call Us</h4>
+                  <a href="tel:+18005550199" className="text-lg font-semibold hover:text-primary transition-colors">+1 (800) 555-0199</a>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                  <MapPin size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-sm text-on-surface-variant mb-1 uppercase tracking-widest">Headquarters</h4>
+                  <p className="text-lg font-semibold">100 Innovation Drive<br/>San Francisco, CA 94111</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Contact Form */}
+        <div className="bg-white rounded-3xl p-8 md:p-10 shadow-[0_20px_40px_rgba(0,0,0,0.04)] border border-slate-100">
+          <h3 className="text-2xl font-headline font-bold mb-8">Send a Message</h3>
+          <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="block font-label text-xs uppercase tracking-widest text-on-surface-variant font-bold ml-1">First Name</label>
+                <input type="text" className="w-full bg-surface-container-lowest border border-slate-200 rounded-xl py-3 px-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none" placeholder="Jane" />
+              </div>
+              <div className="space-y-2">
+                <label className="block font-label text-xs uppercase tracking-widest text-on-surface-variant font-bold ml-1">Last Name</label>
+                <input type="text" className="w-full bg-surface-container-lowest border border-slate-200 rounded-xl py-3 px-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none" placeholder="Doe" />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <label className="block font-label text-xs uppercase tracking-widest text-on-surface-variant font-bold ml-1">Email Address</label>
+              <input type="email" className="w-full bg-surface-container-lowest border border-slate-200 rounded-xl py-3 px-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none" placeholder="jane@company.com" />
+            </div>
+            <div className="space-y-2">
+              <label className="block font-label text-xs uppercase tracking-widest text-on-surface-variant font-bold ml-1">Company</label>
+              <input type="text" className="w-full bg-surface-container-lowest border border-slate-200 rounded-xl py-3 px-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none" placeholder="Company Name" />
+            </div>
+            <div className="space-y-2">
+              <label className="block font-label text-xs uppercase tracking-widest text-on-surface-variant font-bold ml-1">Message</label>
+              <textarea rows={4} className="w-full bg-surface-container-lowest border border-slate-200 rounded-xl py-3 px-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none resize-none" placeholder="How can we help you scale?"></textarea>
+            </div>
+            <button type="submit" className="w-full bg-primary text-white font-headline font-bold py-4 rounded-xl shadow-lg shadow-primary/20 hover:bg-primary/90 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+              <span>Send Message</span>
+              <Send size={18} />
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const SignInPage = ({ setCurrentPage }: { setCurrentPage: (page: string) => void }) => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden" style={{ background: 'radial-gradient(circle at top left, #f8f9fb 0%, #e1e2e4 40%, #6ffbbe 100%)' }}>
@@ -1467,7 +1556,7 @@ const SignInPage = ({ setCurrentPage }: { setCurrentPage: (page: string) => void
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="w-full max-w-xl rounded-xl p-8 md:p-12 shadow-[0_40px_40px_rgba(0,108,73,0.04)]"
+          className="w-full max-w-xl rounded-xl p-8 md:p-12 shadow-[0_40px_40px_rgba(0,108,73,0.04)] relative"
           style={{
             background: 'rgba(255, 255, 255, 0.35)',
             backdropFilter: 'blur(16px)',
@@ -1475,6 +1564,14 @@ const SignInPage = ({ setCurrentPage }: { setCurrentPage: (page: string) => void
             border: '1px solid rgba(255, 255, 255, 0.2)'
           }}
         >
+          <button 
+            onClick={() => setCurrentPage('home')}
+            className="absolute top-6 left-6 p-2 text-on-surface-variant hover:text-primary hover:bg-white/50 rounded-full transition-all"
+            aria-label="Go back"
+          >
+            <ArrowLeft size={24} />
+          </button>
+
           {/* Brand Anchor */}
           <div className="mb-10 text-center">
             <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); }} className="inline-block">
@@ -1584,6 +1681,7 @@ export default function App() {
         {currentPage === 'about' && <AboutPage />}
         {currentPage === 'solutions' && <SolutionsPage />}
         {currentPage === 'pricing' && <PricingPage />}
+        {currentPage === 'contact' && <ContactPage />}
         {currentPage === 'signin' && <SignInPage setCurrentPage={setCurrentPage} />}
       </main>
       {currentPage !== 'signin' && <Footer setCurrentPage={setCurrentPage} />}
