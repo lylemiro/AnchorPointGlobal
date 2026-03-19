@@ -1581,7 +1581,10 @@ const SignInPage = ({ setCurrentPage }: { setCurrentPage: (page: string) => void
           </div>
 
           {/* Social Action */}
-          <button className="w-full bg-white/40 hover:bg-white/60 transition-all duration-300 py-4 px-6 rounded-2xl flex items-center justify-center gap-3 border border-white/20 active:scale-[0.98]">
+          <button 
+            onClick={() => setCurrentPage('onboarding')}
+            className="w-full bg-white/40 hover:bg-white/60 transition-all duration-300 py-4 px-6 rounded-2xl flex items-center justify-center gap-3 border border-white/20 active:scale-[0.98]"
+          >
             <svg height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
               <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
@@ -1599,7 +1602,7 @@ const SignInPage = ({ setCurrentPage }: { setCurrentPage: (page: string) => void
           </div>
 
           {/* Form */}
-          <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+          <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); setCurrentPage('onboarding'); }}>
             <div className="space-y-4">
               <div className="relative group">
                 <label className="block font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-1 ml-1 font-bold">Full Name</label>
@@ -1658,12 +1661,195 @@ const SignInPage = ({ setCurrentPage }: { setCurrentPage: (page: string) => void
   );
 };
 
+const OnboardingPage = ({ setCurrentPage }: { setCurrentPage: (page: string) => void }) => {
+  const [role, setRole] = useState<'client' | 'talent' | null>(null);
+
+  return (
+    <div className="min-h-screen flex flex-col md:flex-row bg-surface-container-lowest font-body">
+      {/* Side Context Blade */}
+      <div className="md:w-1/3 lg:w-1/4 bg-surface-container-low p-8 md:p-12 flex flex-col justify-between border-r border-outline-variant/20 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-primary/5 to-transparent pointer-events-none"></div>
+        
+        <div className="relative z-10">
+          <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); }} className="inline-block mb-16">
+            <h2 className="font-headline text-2xl font-extrabold tracking-tighter text-primary hover:opacity-80 transition-opacity">AnchorPointGlobal</h2>
+          </a>
+          
+          <div className="space-y-8">
+            <div>
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm shadow-md">1</div>
+                <h3 className="font-headline font-bold text-on-surface">Select Path</h3>
+              </div>
+              <p className="text-sm text-on-surface-variant ml-11">Define your journey with APG.</p>
+            </div>
+            
+            <div className="opacity-50">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-sm">2</div>
+                <h3 className="font-headline font-bold text-on-surface">Profile Setup</h3>
+              </div>
+            </div>
+            
+            <div className="opacity-50">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-sm">3</div>
+                <h3 className="font-headline font-bold text-on-surface">Assessment</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="relative z-10 mt-12">
+          <div className="glass-panel p-6 rounded-2xl bg-white/50 border border-white/40 shadow-sm">
+            <h4 className="font-bold text-sm mb-2 flex items-center gap-2">
+              <ShieldCheck size={16} className="text-primary" />
+              Secure Onboarding
+            </h4>
+            <p className="text-xs text-on-surface-variant leading-relaxed">Your data is encrypted and stored securely. We never share your information without explicit consent.</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Focus Mode Canvas */}
+      <div className="flex-1 p-8 md:p-16 lg:p-24 flex flex-col relative overflow-y-auto">
+        <div className="absolute top-[-20%] right-[-10%] w-[50%] h-[50%] bg-primary-container/20 blur-[120px] rounded-full -z-10 pointer-events-none"></div>
+        
+        <div className="max-w-3xl w-full mx-auto flex-grow flex flex-col justify-center">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-12"
+          >
+            <span className="inline-block py-1 px-3 rounded-full bg-primary/10 text-primary font-label font-bold text-[10px] uppercase tracking-widest mb-4">Welcome to APG</span>
+            <h1 className="text-4xl md:text-5xl font-headline font-extrabold text-on-surface tracking-tight mb-4">How will you use AnchorPoint?</h1>
+            <p className="text-lg text-on-surface-variant">Select your primary goal to customize your onboarding experience.</p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-6 mb-12">
+            {/* Client Option */}
+            <motion.label 
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className={`relative cursor-pointer rounded-3xl p-8 border-2 transition-all duration-300 flex flex-col h-full ${role === 'client' ? 'border-primary bg-primary/5 shadow-lg shadow-primary/10' : 'border-outline-variant/30 bg-white hover:border-primary/50 hover:bg-surface-container-lowest'}`}
+            >
+              <input 
+                type="radio" 
+                name="role" 
+                value="client" 
+                className="sr-only" 
+                onChange={() => setRole('client')}
+                checked={role === 'client'}
+              />
+              <div className="flex justify-between items-start mb-6">
+                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${role === 'client' ? 'bg-primary text-white shadow-md' : 'bg-surface-container-low text-on-surface-variant'}`}>
+                  <Rocket size={28} />
+                </div>
+                <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${role === 'client' ? 'border-primary bg-primary' : 'border-outline-variant'}`}>
+                  {role === 'client' && <Check size={14} className="text-white" />}
+                </div>
+              </div>
+              <h3 className="font-headline text-2xl font-bold mb-3 text-on-surface">I'm a Client</h3>
+              <p className="text-on-surface-variant text-sm leading-relaxed flex-grow">I want to hire elite, pre-vetted talent to scale my business operations and drive growth.</p>
+              
+              {/* Client Tier Selection Teaser */}
+              <AnimatePresence>
+                {role === 'client' && (
+                  <motion.div 
+                    initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                    animate={{ opacity: 1, height: 'auto', marginTop: 24 }}
+                    exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                    className="pt-6 border-t border-primary/20"
+                  >
+                    <p className="text-xs font-bold text-primary uppercase tracking-wider mb-3">Popular Tiers</p>
+                    <div className="flex gap-2">
+                      <span className="px-3 py-1 bg-white rounded-lg text-xs font-semibold border border-primary/20 text-on-surface">Part-Time</span>
+                      <span className="px-3 py-1 bg-primary text-white rounded-lg text-xs font-semibold shadow-sm">Full-Time</span>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.label>
+
+            {/* Talent Option */}
+            <motion.label 
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className={`relative cursor-pointer rounded-3xl p-8 border-2 transition-all duration-300 flex flex-col h-full ${role === 'talent' ? 'border-primary bg-primary/5 shadow-lg shadow-primary/10' : 'border-outline-variant/30 bg-white hover:border-primary/50 hover:bg-surface-container-lowest'}`}
+            >
+              <input 
+                type="radio" 
+                name="role" 
+                value="talent" 
+                className="sr-only" 
+                onChange={() => setRole('talent')}
+                checked={role === 'talent'}
+              />
+              <div className="flex justify-between items-start mb-6">
+                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${role === 'talent' ? 'bg-primary text-white shadow-md' : 'bg-surface-container-low text-on-surface-variant'}`}>
+                  <Star size={28} />
+                </div>
+                <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${role === 'talent' ? 'border-primary bg-primary' : 'border-outline-variant'}`}>
+                  {role === 'talent' && <Check size={14} className="text-white" />}
+                </div>
+              </div>
+              <h3 className="font-headline text-2xl font-bold mb-3 text-on-surface">I'm a Talent</h3>
+              <p className="text-on-surface-variant text-sm leading-relaxed flex-grow">I am a top-tier professional looking to join the elite network and work with global leaders.</p>
+              
+              {/* Skill Assessment Teaser */}
+              <AnimatePresence>
+                {role === 'talent' && (
+                  <motion.div 
+                    initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                    animate={{ opacity: 1, height: 'auto', marginTop: 24 }}
+                    exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                    className="pt-6 border-t border-primary/20"
+                  >
+                    <div className="flex items-center gap-3 bg-white p-3 rounded-xl border border-primary/10">
+                      <div className="w-8 h-8 rounded-lg bg-primary-container/20 flex items-center justify-center text-primary">
+                        <Brain size={16} />
+                      </div>
+                      <div>
+                        <p className="text-xs font-bold text-on-surface">Next Step: Assessment</p>
+                        <p className="text-[10px] text-on-surface-variant">Prepare for a 45-min skill evaluation.</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.label>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex flex-col-reverse sm:flex-row items-center justify-between gap-4 mt-auto pt-8 border-t border-outline-variant/20">
+            <button 
+              onClick={() => setCurrentPage('home')}
+              className="text-on-surface-variant font-bold text-sm hover:text-primary transition-colors flex items-center gap-2 px-4 py-2"
+            >
+              <ArrowLeft size={16} />
+              Back to site
+            </button>
+            <button 
+              disabled={!role}
+              onClick={() => setCurrentPage('home')}
+              className={`px-8 py-4 rounded-xl font-headline font-bold text-sm flex items-center gap-2 transition-all duration-300 ${role ? 'bg-primary text-white shadow-lg shadow-primary/20 hover:bg-primary/90 active:scale-95' : 'bg-surface-container-high text-on-surface-variant/50 cursor-not-allowed'}`}
+            >
+              Proceed to Assessment
+              <ArrowRight size={16} />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
 
   return (
     <div className="min-h-screen flex flex-col">
-      {currentPage !== 'signin' && <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} />}
+      {currentPage !== 'signin' && currentPage !== 'onboarding' && <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} />}
       <main className="flex-grow">
         {currentPage === 'home' && (
           <>
@@ -1683,8 +1869,9 @@ export default function App() {
         {currentPage === 'pricing' && <PricingPage />}
         {currentPage === 'contact' && <ContactPage />}
         {currentPage === 'signin' && <SignInPage setCurrentPage={setCurrentPage} />}
+        {currentPage === 'onboarding' && <OnboardingPage setCurrentPage={setCurrentPage} />}
       </main>
-      {currentPage !== 'signin' && <Footer setCurrentPage={setCurrentPage} />}
+      {currentPage !== 'signin' && currentPage !== 'onboarding' && <Footer setCurrentPage={setCurrentPage} />}
     </div>
   );
 }
