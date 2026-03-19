@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-headline: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  --color-primary: #006c49;
+  --color-primary-container: #10b981;
+  --color-primary-fixed: #6ffbbe;
+  --color-on-primary: #ffffff;
+  
+  --color-surface: #f8f9fb;
+  --color-surface-container-low: #f3f4f6;
+  --color-surface-container-lowest: #ffffff;
+  --color-on-surface: #191c1e;
+  --color-on-surface-variant: #3c4a42;
+  
+  --color-outline: #6c7a71;
+  --color-outline-variant: #bbcabf;
+
+  --radius-lg: 2rem;
+  --radius-xl: 3rem;
+}
+
+@layer base {
+  body {
+    @apply bg-surface font-body text-on-surface antialiased;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/45 backdrop-blur-md border border-white/60 shadow-xl;
+  }
+  
+  .hero-glass {
+    @apply bg-white/10 backdrop-blur-sm border border-white/20;
+  }
+  
+  .lumina-emerald-glass {
+    @apply bg-white/5 backdrop-blur-xl border border-emerald-500/10;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-br from-primary to-primary-container text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-xl shadow-emerald-900/20 hover:scale-105 active:scale-95 transition-all duration-300;
+  }
+
+  .btn-secondary {
+    @apply bg-white/80 backdrop-blur border border-white/60 px-8 py-4 rounded-2xl font-bold text-lg text-on-surface hover:bg-white transition-all duration-300;
+  }
+
+  .btn-glass {
+    @apply bg-white/30 backdrop-blur-md border border-white/20 px-6 py-2.5 rounded-2xl font-bold text-sm text-on-surface hover:bg-white/50 transition-all duration-300;
+  }
+}
